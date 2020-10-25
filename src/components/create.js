@@ -1,4 +1,5 @@
-import React from 'react';
+//Create 'Create' component
+import React from 'react';//import React to enable use of React library for single page application
 export class Create extends React.Component {
 
     render() {
