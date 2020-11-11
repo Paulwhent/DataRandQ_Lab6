@@ -1,8 +1,8 @@
 
-
-//Create 'Create' component
+//Create 'create' component
 import React from 'react';//import React to enable use of React library for single page application
-import './create.css'; //import css styling 
+import './create.css'; //import css styling
+import axios from 'axios'; //import axios package to enable http requests (promise implementation)
 export class Create extends React.Component {
 
     //constructor for create class
@@ -54,7 +54,26 @@ export class Create extends React.Component {
         alert("Movie: " + this.state.Title + " " + "Year: " + this.state.Year + " " + "Poster: " + this.state.Poster);
         console.log("Button clicked");
         console.log("Movie: " + this.state.Title + "   " + "Year: " + this.state.Year + "   " + "Poster: " + this.state.Poster);
+
+        //create newMovie object with movie data
+        const newMovie = {
+            Title: this.state.Title,
+            Year: this.state.Year,
+            Poster: this.state.Poster
+        }
+        //post object created above to BackEnd server
+        axios.post('http://localhost:4000/api/movies', newMovie)
+
+            .then((res) => {
+                console.log(res);
+            })
+
+            .catch((err) => {
+                console.log(err);
+            });
+
     }
+
     render() {
         return (
             //add form to div with submission button that invokes onSubmit method
@@ -66,19 +85,19 @@ export class Create extends React.Component {
                         <label>Movie Title Input</label>
                         {/*text input box, form-control styling, add value to state when (Title) input event triggered*/}
                         <input type='text' placeholder="Input Title here:" background-color="red" className='form-control'
-                         value={this.state.Title} onChange={this.onChangeTitle}></input>
+                            value={this.state.Title} onChange={this.onChangeTitle}></input>
                     </div>
 
                     <div className='form-group'>
                         <label>Movie Year Input</label>
-                        <input type='text' placeholder="Input Year here:" className='form-control' 
-                        value={this.state.Year} onChange={this.onChangeYear}></input>
+                        <input type='text' placeholder="Input Year here:" className='form-control'
+                            value={this.state.Year} onChange={this.onChangeYear}></input>
                     </div>
 
                     <div className='form-group'>
                         <label>Movie Poster Input</label>
-                        <textarea type='text' placeholder="Input Poster link here:" className='form-control' 
-                        value={this.state.Poster} onChange={this.onChangePoster}></textarea>
+                        <textarea type='text' placeholder="Input Poster link here:" className='form-control'
+                            value={this.state.Poster} onChange={this.onChangePoster}></textarea>
                     </div>
 
                     <div className='form-group'>

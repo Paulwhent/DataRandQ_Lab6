@@ -12,13 +12,12 @@ export class Read extends React.Component {
                 //called each time component is active
 
                 componentDidMount() {
-                    //to set up 'promise' for json data from external url         
-                    axios.get('https://jsonblob.com/api/jsonblob/520c3b5e-0312-11eb-a6af-cbf00d776032')
+                    //to set up 'promise' for json data from BackEnd server         
+                    axios.get('http://localhost:4000/api/movies')
                         //for 'fullfilled' state
                         .then(
                             //anonymous method to get data in form of response if 'promise' fullfilled and update 'state' by populating movies array
                             (response) => {
-                                this.setState({ movies: response.data.Search })
                             })
                         //for 'rejected' state
                         .catch(
